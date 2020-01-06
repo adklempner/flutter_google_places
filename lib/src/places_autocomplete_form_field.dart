@@ -45,6 +45,7 @@ class PlacesAutocompleteFormField extends FormField<String> {
   PlacesAutocompleteFormField({
     Key key,
     @required String apiKey,
+    String proxyBaseUrl,
     this.controller,
     Icon leading,
     String initialValue,
@@ -83,6 +84,7 @@ class PlacesAutocompleteFormField extends FormField<String> {
                   effectiveDecoration?.copyWith(errorText: state.errorText),
               controller: state._effectiveController,
               apiKey: apiKey,
+              proxyBaseUrl: proxyBaseUrl,
               leading: leading,
               trailing: trailing,
               offset: offset,

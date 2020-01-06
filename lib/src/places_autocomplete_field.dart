@@ -39,6 +39,7 @@ class PlacesAutocompleteField extends StatefulWidget {
   const PlacesAutocompleteField({
     Key key,
     @required this.apiKey,
+    this.proxyBaseUrl,
     this.controller,
     this.leading,
     this.hint = "Search",
@@ -84,6 +85,8 @@ class PlacesAutocompleteField extends StatefulWidget {
   ///
   /// * <https://developers.google.com/places/web-service/autocomplete>
   final String apiKey;
+
+  final String proxyBaseUrl;
 
   /// The decoration to show around the text field.
   ///
@@ -158,6 +161,7 @@ class _LocationAutocompleteFieldState extends State<PlacesAutocompleteField> {
   Future<Prediction> _showAutocomplete() async => PlacesAutocomplete.show(
         context: context,
         apiKey: widget.apiKey,
+        proxyBaseUrl: widget.proxyBaseUrl,
         offset: widget.offset,
         onError: widget.onError,
         mode: widget.mode,
@@ -175,7 +179,7 @@ class _LocationAutocompleteFieldState extends State<PlacesAutocompleteField> {
     Prediction p = await _showAutocomplete();
 
     if (p == null) return;
-    
+
     setState(() {
       _effectiveController.text = p.description;
       if (widget.onChanged != null) {
